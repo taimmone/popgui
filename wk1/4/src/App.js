@@ -4,8 +4,10 @@ import { useState } from 'react';
 import Controls from './components/Controls/Controls';
 
 const App = () => {
-  const [movedUnits, setMovedDistance] = useState(5);
-  const [mouseSpeed, setMouseSpeed] = useState(28);
+  const [stats, setStats] = useState({
+    mouse: { distance: 0, speed: 0 },
+    scrollWheel: { distance: 0, speed: 0 },
+  });
   const [listeners, setListeners] = useState({
     mouseDistance: false,
     mouseSpeed: false,
@@ -22,11 +24,7 @@ const App = () => {
       <CssBaseline />
       <Container maxWidth="sm" component="main" disableGutters={true}>
         <Box component={Paper} display="flex" p="1rem">
-          <Controls
-            stats={{ movedUnits, mouseSpeed }}
-            setters={{ setMovedDistance, setMouseSpeed }}
-            {...{ listeners, handleChange }}
-          />
+          <Controls {...{ stats, setStats, listeners, handleChange }} />
           <Box
             component={Paper}
             variant="outlined"
